@@ -30,5 +30,4 @@ vm_clusters = {
 	managed_disk_size_gb = 32
        tags          = map(string)
    
-  },
-
+  }
