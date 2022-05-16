@@ -22,10 +22,6 @@ output "virtual-network-ip-range" {
     value           =   azurerm_virtual_network.vnet.address_space
 }
 
-output "subnet-name" {
-    description     =   "Print the name of the subnet"
-    value           =   azurerm_subnet.sn.name
-}
 
 output "subnet" {
     description =   "Map subnet name with address_prefixes"
