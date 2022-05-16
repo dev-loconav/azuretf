@@ -71,7 +71,7 @@ provider "azuread" {
 //     source  =   "./azure/linuxVM"
 //     for_each = var.vm_clusters
 // }
-// module "vnet" {
-//     source  =   "./azure/virtualnetwork"
-// }
+module "vnet" {
+     source  =   "./azure/virtualnetwork"
+}
 
