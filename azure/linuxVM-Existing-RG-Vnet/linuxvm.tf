@@ -36,7 +36,7 @@ resource "azurerm_network_interface" "nic" {
     ip_configuration                  {
         name                          =  "linuxvm-public-ip${count.index}"
         subnet_id                     =   var.azurerm_subnet.web.id
-        public_ip_address_id          =   azurerm_public_ip.pip.[count.index]
+        public_ip_address_id          =   azurerm_public_ip.pip[count.index]
         private_ip_address_allocation =   var.allocation_method[1]
     }
 }
@@ -51,7 +51,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     name                              =   "var.cluster_name${count.index}"
     resource_group_name               =   var.resource_group_name
     location                          =   var.location
-    network_interface_ids             =   [azurerm_network_interface.nic.id]
+    network_interface_ids             =   [azurerm_network_interface.nic.[count.index]]
     size                              =   var.virtual_machine_size
     computer_name                     =   "var.cluster_name${count.index}"
     admin_username                    =   var.admin_username
