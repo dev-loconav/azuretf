@@ -86,7 +86,7 @@ pipeline{
 
         stage('Terraform Plan'){
              when { 
-                environment name: 'MODE', value: 'destroy' 
+                environment name: 'MODE', value: 'create' 
             }
             steps {
 
@@ -111,7 +111,7 @@ pipeline{
 
         stage('Waiting for Approval'){
                         when { 
-                environment name: 'MODE', value: 'destroy' 
+                environment name: 'MODE', value: 'create' 
             }
             steps {
                 timeout(time: 10, unit: 'MINUTES') {
@@ -124,7 +124,7 @@ pipeline{
 
         stage('Terraform Apply'){
                         when { 
-                environment name: 'MODE', value: 'destroy' 
+                environment name: 'MODE', value: 'create' 
             }
             steps {
                     ansiColor('xterm') {
