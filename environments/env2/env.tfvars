@@ -8,5 +8,5 @@ subnet =    {
         "DB-Subnet"     =       "10.3.2.0/24"
     }
 tags  =         {
-        "Env"        =   "environment3"
+        "Env"        =   "environment2"
 }
