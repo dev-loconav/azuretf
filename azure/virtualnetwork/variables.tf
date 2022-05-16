@@ -34,3 +34,8 @@ variable "subnet" {
     type            =       map(string)
 
 }
+
+variable "tags" {
+    description =   "Resouce tags"
+    type        =   map(string)
+}
