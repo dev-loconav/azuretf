@@ -56,3 +56,9 @@ variable "tags" {
     description =   "Resouce tags"
     type        =   map(string)
 }
+
+variable "environment_name" {
+    description =   "name of the env"
+    type        =   string
+
+}
