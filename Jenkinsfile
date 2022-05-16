@@ -1,7 +1,7 @@
 pipeline{
     agent any
     parameters {
-    string(name: 'environ', defaultValue: 'none', description: 'environment')
+    string(name: 'environ', defaultValue: 'env1', description: 'environment')
     string(name: 'mode', defaultValue: 'create', description: 'create of destroy')
   }
     tools {
