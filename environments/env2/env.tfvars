@@ -10,3 +10,4 @@ subnet =    {
 tags  =         {
         "Env"        =   "environment2"
 }
+environment_name = "env1"
