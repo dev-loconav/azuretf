@@ -78,6 +78,6 @@ module "vnet" {
     virtual_network_name  = var.virtual_network_name
     vnet_address_range  = var.vnet_address_range
     subnet = var.subnet
-//    tags  = var.tags
+    tags  = var.tags
 }
 
