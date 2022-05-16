@@ -85,6 +85,9 @@ pipeline{
 }
 
         stage('Terraform Plan'){
+             when { 
+                environment name: 'MODE', value: 'destroy' 
+            }
             steps {
 
                     ansiColor('xterm') {
@@ -107,6 +110,9 @@ pipeline{
         }
 
         stage('Waiting for Approval'){
+                        when { 
+                environment name: 'MODE', value: 'destroy' 
+            }
             steps {
                 timeout(time: 10, unit: 'MINUTES') {
                     input (message: "Deploy the infrastructure?")
@@ -117,6 +123,9 @@ pipeline{
     
 
         stage('Terraform Apply'){
+                        when { 
+                environment name: 'MODE', value: 'destroy' 
+            }
             steps {
                     ansiColor('xterm') {
                     withCredentials([azureServicePrincipal(
