@@ -76,3 +76,23 @@ variable "sku" {
 variable "vm_image_version" {
     default     =       "latest"
 }
+
+variable "virtual_network_name" {
+    description =   "virtual_network_name"
+    type        =   string
+}
+
+variable "location" {
+    description =   "location"
+    type        =   string
+}
+
+variable "instance_count" {
+    description =   "instance_count"
+    type        =   string
+}
+
+variable "resource_group_name" {
+    description =   "resource_group_name"
+    type        =   string
+}
