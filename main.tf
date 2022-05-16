@@ -14,7 +14,7 @@ terraform {
     resource_group_name  = "tfauto"
     storage_account_name = "tfautojenkins"
     container_name       = "tfstate"
-    key                  = "az.tfstate"
+    key                  = var.environment_name
   }
 }
 
