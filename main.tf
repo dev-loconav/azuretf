@@ -85,9 +85,9 @@ module "vm" {
   
   for_each = var.vm_clusters
     
-  cluster_name = each.value.cluster_name
-  instance_count = each.value.instance_count
+  cluster_name = each.value.cluster_name  
   allocation_method  = each.value.allocation_method
+    instance_count = each.value.instance_count
   virtual_machine_size  = each.value.virtual_machine_size
   admin_username  = each.value.admin_username
   admin_password  = each.value.admin_password
