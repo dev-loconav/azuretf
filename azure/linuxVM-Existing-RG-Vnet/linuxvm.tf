@@ -2,20 +2,11 @@
 # Create a Linux VM in an existing RG and VNET
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
 
-data "azurerm_resource_group" "rg" {
-    name        =   "Jenkins"
-}
-
-
-data "azurerm_virtual_network" "vnet" {
-    name                    =   "Test-vnet"
-    resource_group_name     =   data.azurerm_resource_group.rg.name
-}
 
 data "azurerm_subnet" "web" {
-    name                    =   "Test-web-subnet"
-    virtual_network_name    =    data.azurerm_virtual_network.vnet.name
-    resource_group_name     =    data.azurerm_resource_group.rg.name
+    name                    =    "App-Subnet"
+    virtual_network_name    =    var.virtual_network_name
+    resource_group_name     =    var.resource_group_name
 }
 
 
@@ -24,9 +15,10 @@ data "azurerm_subnet" "web" {
 #
 
 resource "azurerm_public_ip" "pip" {
-    name                            =     "linuxvm-public-ip"
-    resource_group_name             =     data.azurerm_resource_group.rg.name
-    location                        =     data.azurerm_resource_group.rg.location
+    count                             =    var.instance_count
+    name                              =   "linuxvm-public-ip${count.index}"
+    resource_group_name             =     var.resource_group_name
+    location                        =     var.location
     allocation_method               =     var.allocation_method[0]
     tags                            =     var.tags
 }
@@ -36,13 +28,14 @@ resource "azurerm_public_ip" "pip" {
 #
 
 resource "azurerm_network_interface" "nic" {
-    name                              =   "linuxvm-nic"
-    resource_group_name               =   data.azurerm_resource_group.rg.name
-    location                          =   data.azurerm_resource_group.rg.location
+    count                             =    var.instance_count
+    name                              =   "linuxvm-nic${count.index}"
+    resource_group_name               =   var.resource_group_name
+    location                          =   var.location
     tags                              =   var.tags
     ip_configuration                  {
-        name                          =  "linux-nic-ipconfig"
-        subnet_id                     =   data.azurerm_subnet.web.id
+        name                          =  "linuxvm-public-ip${count.index}"
+        subnet_id                     =   var.azurerm_subnet.web.id
         public_ip_address_id          =   azurerm_public_ip.pip.id
         private_ip_address_allocation =   var.allocation_method[1]
     }
@@ -54,12 +47,13 @@ resource "azurerm_network_interface" "nic" {
 # 
 
 resource "azurerm_linux_virtual_machine" "vm" {
-    name                              =   "linuxvm"
-    resource_group_name               =   data.azurerm_resource_group.rg.name
-    location                          =   data.azurerm_resource_group.rg.location
+    count                             =    var.instance_count
+    name                              =   var.cluster_name"${count.index}"
+    resource_group_name               =   var.resource_group_name
+    location                          =   var.location
     network_interface_ids             =   [azurerm_network_interface.nic.id]
     size                              =   var.virtual_machine_size
-    computer_name                     =   var.computer_name
+    computer_name                     =   var.cluster_name"${count.index}"
     admin_username                    =   var.admin_username
     admin_password                    =   var.admin_password
     disable_password_authentication   =   false
