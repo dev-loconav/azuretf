@@ -11,7 +11,7 @@ pipeline{
         TF_HOME = tool('terraform')
         TF_IN_AUTOMATION = "true"
         PATH = "$TF_HOME:$PATH"
-        MODE= ${mode}
+        MODE= "${mode}"
     }
     stages {
     
