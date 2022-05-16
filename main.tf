@@ -82,9 +82,10 @@ module "vm" {
       resource_group_name = var.resource_group_name
     location  = var.location
     virtual_network_name  = var.virtual_network_name  
+  
   for_each = var.vm_clusters
-
-  //cluster_name = each.value.cluster_name
+    
+  cluster_name = each.value.cluster_name
   instance_count = each.value.instance_count
   allocation_method  = each.value.allocation_method
   virtual_machine_size  = each.value.virtual_machine_size
@@ -97,7 +98,7 @@ module "vm" {
   offer = each.value.offer
   sku = each.value.sku
   vm_image_version = each.value.vm_image_version  
-  //managed_disk_size_gb = each.value.managed_disk_size_gb
+  managed_disk_size_gb = each.value.managed_disk_size_gb
   tags = each.value.tags
 }
 
