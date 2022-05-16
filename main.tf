@@ -10,12 +10,7 @@ terraform {
             source  =   "hashicorp/azurerm"
         }
     }
-    backend "azurerm" {
-    resource_group_name  = "tfauto"
-    storage_account_name = "tfautojenkins"
-    container_name       = "tfstate"
-    key                  = var.environment_name
-  }
+    backend "azurerm" {}
 }
 
 # Provider Block
