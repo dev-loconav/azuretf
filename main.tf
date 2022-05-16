@@ -69,5 +69,6 @@ provider "azuread" {
 
 module "linuxvm" {
      source  =   "./azure/linuxVM"
+//     for_each = var.vm_clusters
 }
 
