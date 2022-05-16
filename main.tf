@@ -85,7 +85,7 @@ module "vm" {
   
   for_each = var.vm_clusters
     
-  cl_name = each.value.cluster_name  
+  cl_name = each.value.cl_name  
   allocation_method  = each.value.allocation_method
     instance_count = each.value.instance_count
   virtual_machine_size  = each.value.virtual_machine_size
@@ -98,7 +98,7 @@ module "vm" {
   offer = each.value.offer
   sku = each.value.sku
   vm_image_version = each.value.vm_image_version  
-  ma_disk_size_gb = each.value.managed_disk_size_gb
+  ma_disk_size_gb = each.value.ma_disk_size_gb
   tags = each.value.tags
 }
 
