@@ -1,5 +1,9 @@
 pipeline{
-    agent any 
+    agent any
+    parameters {
+    string(name: 'environ', defaultValue: 'none', description: 'environment')
+    string(name: 'mode', defaultValue: 'create', description: 'create of destroy')
+  }
     tools {
         "org.jenkinsci.plugins.terraform.TerraformInstallation" "terraform"
     }
@@ -7,6 +11,7 @@ pipeline{
         TF_HOME = tool('terraform')
         TF_IN_AUTOMATION = "true"
         PATH = "$TF_HOME:$PATH"
+        MODE= ${mode}
     }
     stages {
     
@@ -52,6 +57,19 @@ pipeline{
                     }
              }
         }
+        
+        
+        stage('env-specific-stuff') {
+            when { 
+                environment name: 'MODE', value: 'destroy' 
+            }
+            steps {
+                sh """
+                echo "destroying" 
+                terraform destroy -var-file environments/${environ}/env.tfvars -var "client_id=$ARM_CLIENT_ID" -var "client_secret=$ARM_CLIENT_SECRET" -var "subscription_id=$ARM_SUBSCRIPTION_ID" -var "tenant_id=$ARM_TENANT_ID"
+                """           
+            }
+}
 
         stage('Terraform Plan'){
             steps {
@@ -68,7 +86,7 @@ pipeline{
                         sh """
                         
                         echo "Creating Terraform Plan"
-                        terraform plan -var-file env.tfvars -var "client_id=$ARM_CLIENT_ID" -var "client_secret=$ARM_CLIENT_SECRET" -var "subscription_id=$ARM_SUBSCRIPTION_ID" -var "tenant_id=$ARM_TENANT_ID"
+                        terraform plan -var-file environments/${environ}/env.tfvars -var "client_id=$ARM_CLIENT_ID" -var "client_secret=$ARM_CLIENT_SECRET" -var "subscription_id=$ARM_SUBSCRIPTION_ID" -var "tenant_id=$ARM_TENANT_ID"
                         """
                         }
                 }
@@ -98,7 +116,7 @@ pipeline{
 
                         sh """
                         echo "Applying the plan"
-                        terraform apply -var-file env.tfvars -auto-approve -var "client_id=$ARM_CLIENT_ID" -var "client_secret=$ARM_CLIENT_SECRET" -var "subscription_id=$ARM_SUBSCRIPTION_ID" -var "tenant_id=$ARM_TENANT_ID"
+                        terraform apply -var-file environments/${environ}/env.tfvars -auto-approve -var "client_id=$ARM_CLIENT_ID" -var "client_secret=$ARM_CLIENT_SECRET" -var "subscription_id=$ARM_SUBSCRIPTION_ID" -var "tenant_id=$ARM_TENANT_ID"
                         """
                                 }
                 }
