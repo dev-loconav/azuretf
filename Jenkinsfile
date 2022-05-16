@@ -59,15 +59,28 @@ pipeline{
         }
         
         
-        stage('env-specific-stuff') {
+        stage('Destroy') {
             when { 
                 environment name: 'MODE', value: 'destroy' 
             }
-            steps {
-                sh """
-                echo "destroying" 
-                terraform destroy -var-file environments/${environ}/env.tfvars -var "client_id=$ARM_CLIENT_ID" -var "client_secret=$ARM_CLIENT_SECRET" -var "subscription_id=$ARM_SUBSCRIPTION_ID" -var "tenant_id=$ARM_TENANT_ID"
-                """           
+             steps {
+
+                    ansiColor('xterm') {
+                    withCredentials([azureServicePrincipal(
+                    credentialsId: 'jenkinsazure',
+                    subscriptionIdVariable: 'ARM_SUBSCRIPTION_ID',
+                    clientIdVariable: 'ARM_CLIENT_ID',
+                    clientSecretVariable: 'ARM_CLIENT_SECRET',
+                    tenantIdVariable: 'ARM_TENANT_ID'
+                ), string(credentialsId: 'access_key', variable: 'ARM_ACCESS_KEY')]) {
+                        
+                        sh """
+                        
+                        echo "Running destroy"
+                        terraform destroy -var-file environments/${environ}/env.tfvars -var "client_id=$ARM_CLIENT_ID" -var "client_secret=$ARM_CLIENT_SECRET" -var "subscription_id=$ARM_SUBSCRIPTION_ID" -var "tenant_id=$ARM_TENANT_ID"
+                        """
+                        }
+                }
             }
 }
 
