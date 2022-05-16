@@ -72,6 +72,12 @@ provider "azuread" {
 //     for_each = var.vm_clusters
 // }
 module "vnet" {
-     source  =   "./azure/virtualnetwork"
+    source  =   "./azure/virtualnetwork"
+    resource_group_name = var.resource_group_name
+    location  = var.location
+    virtual_network_name  = var.virtual_network_name
+    vnet_address_range  = var.vnet_address_range
+    subnet = var.subnet
+    tags  = var.tags
 }
 
