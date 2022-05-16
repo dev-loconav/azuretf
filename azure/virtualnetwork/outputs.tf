@@ -27,7 +27,7 @@ output "subnet-name" {
     value           =   azurerm_subnet.sn.name
 }
 
-output "subnet-ip-range" {
-    description     =   "Print the ip range of the subnet"
-    value           =   [azurerm_subnet.sn.address_prefixes]
+output "subnet" {
+    description =   "Map subnet name with address_prefixes"
+    value       =   { for s in azurerm_subnet.sn: s.name => s.address_prefixes }
 }
