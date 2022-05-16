@@ -62,3 +62,24 @@ variable "environment_name" {
     type        =   string
 
 }
+
+variable "vm_clusters" {
+  type = map(object({
+    cluster_name      = string
+    allocation_method = string
+    instance_count    = number
+    virtual_machine_size  = string
+	admin_username = string
+	admin_password = string
+	os_disk_caching = string
+	os_disk_storage_account_type = string
+	os_disk_size_gb = number
+	publisher	= string
+	offer		= string
+	sku		= string
+	vm_image_version = string
+	managed_disk_size_gb = number
+       tags          = map(string)
+  }))
+}
+
