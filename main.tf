@@ -67,8 +67,11 @@ provider "azuread" {
 //     source  =   "./azure/provisioners-example"
 // }
 
-module "linuxvm" {
-     source  =   "./azure/linuxVM"
+// module "linuxvm" {
+//     source  =   "./azure/linuxVM"
 //     for_each = var.vm_clusters
-}
+// }
+// module "vnet" {
+//     source  =   "./azure/virtualnetwork"
+// }
 
