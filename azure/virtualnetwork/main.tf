@@ -9,10 +9,7 @@
 resource "azurerm_resource_group" "rg" {
     name        =   var.resource_group_name
     location    =   var.location
-    tags        =   {
-        "author"        =   "Vamsi"
-        "deployed_with" =   "Terraform"
-    }
+    tags        =   var.tags
 }
 
 #
@@ -24,10 +21,7 @@ resource "azurerm_virtual_network" "vnet" {
   name                  =   var.virtual_network_name
   location              =   azurerm_resource_group.rg.location
   address_space         =   [var.vnet_address_range]
-   tags                 =   {
-        "author"        =   "Vamsi"
-        "deployed_with" =   "Terraform"
-    }
+   tags                 =   var.tags
 }
 
 #
@@ -35,8 +29,9 @@ resource "azurerm_virtual_network" "vnet" {
 #
 
 resource "azurerm_subnet" "sn" {
-   name                 =   var.subnet_name
+   for_each             =   var.subnet
+   name                 =   each.key
    resource_group_name  =   azurerm_resource_group.rg.name
    virtual_network_name =   azurerm_virtual_network.vnet.name
-   address_prefixes     =   [var.subnet_address_range]
+   address_prefixes     =   [each.value]
 }
