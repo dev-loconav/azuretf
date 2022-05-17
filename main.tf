@@ -98,8 +98,8 @@ module "vm" {
   offer = each.value.offer
    sku = each.value.sku
   vm_image_version = each.value.vm_image_version  
-   ma_disk_size_gb = each.value.ma_disk_size_gb
+   managed_disk_size_gb = each.value.managed_disk_size_gb
   tags = each.value.tags
-   cl_name = each.value.cl_name  
+   cluster_name = each.value.cluster_name  
 }
 
