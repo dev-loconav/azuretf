@@ -30,7 +30,7 @@ pipeline{
                         sh """
                                 
                         echo "Initialising Terraform"
-                        terraform init -backend-config="access_key=$ARM_ACCESS_KEY" -reconfigure -backend-config="environments/${environ}/backend.conf"
+                        terraform init -backend-config="access_key=$ARM_ACCESS_KEY" -reconfigure -upgrade -backend-config="environments/${environ}/backend.conf"
                         """
                            }
                     }
