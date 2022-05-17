@@ -36,7 +36,7 @@ resource "azurerm_network_interface" "nic" {
     ip_configuration                  {
         name                          =  "linuxvm-public-ip${count.index}"
         subnet_id                     =   data.azurerm_subnet.web.id
-        public_ip_address_id          =   string(azurerm_public_ip.pip[count.index])
+        public_ip_address_id          =   tostring(azurerm_public_ip.pip[count.index])
         private_ip_address_allocation =   var.allocation_method
     }
 }
