@@ -96,3 +96,13 @@ variable "resource_group_name" {
     description =   "resource_group_name"
     type        =   string
 }
+
+variable "managed_disk_size_gb" {
+    description =   "managed_disk_size_gb"
+    type        =   string
+}
+
+variable "cluster_name" {
+    description =   "cluster_name"
+    type        =   string
+}
