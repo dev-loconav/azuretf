@@ -80,7 +80,7 @@ variable "vm_clusters" {
 	vm_image_version = string
 
 	 managed_disk_size_gb = number
-       tags          = map(string)
+    
   }))
 }
 
