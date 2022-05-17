@@ -28,7 +28,6 @@ vm_clusters = {
 	sku		= "16.04-LTS"
 	vm_image_version = "latest"
 	managed_disk_size_gb = 32
-       tags          = map(string)
    
   }
 }
