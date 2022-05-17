@@ -14,7 +14,7 @@ environment_name = "env1"
 
 vm_clusters = {
   "k8s_masters" = {
-    cluster_name   = "k8s_masters"
+    cluster_name   = "k8s-masters"
     instance_count = 3
         allocation_method = "Dynamic"
     virtual_machine_size  = "Standard_B1s"
