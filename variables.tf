@@ -78,8 +78,7 @@ variable "vm_clusters" {
 	offer		= string
 	 sku		= string
 	vm_image_version = string
-	  p1	= string
-	  p2	= string
+
 	 ma_disk_size_gb = number
        tags          = map(string)
   }))
