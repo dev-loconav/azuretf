@@ -96,7 +96,7 @@ module "vm" {
   os_disk_size_gb = each.value.os_disk_size_gb
   publisher = each.value.publisher
   offer = each.value.offer
-  sku = each.value.sku
+  // sku = each.value.sku
   vm_image_version = each.value.vm_image_version  
   // ma_disk_size_gb = each.value.ma_disk_size_gb
   tags = each.value.tags
