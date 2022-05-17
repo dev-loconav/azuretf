@@ -31,5 +31,5 @@ vm_clusters = {
        tags          = map(string)
    
   }
-
+}
 	
