@@ -76,7 +76,7 @@ variable "vm_clusters" {
 	os_disk_size_gb = number
 	publisher	= string
 	offer		= string
-	sku		= string
+	// sku		= string
 	vm_image_version = string
 	  p1	= string
 	  p2	= string
