@@ -61,7 +61,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
     disable_password_authentication   =   false
 
     os_disk  {
-        name                          =   "linuxvm-os-disk"
+        count                           =  var.instance_count
+        name                          =   "linuxvm-os-disk-${count.index}"
         caching                       =   var.os_disk_caching
         storage_account_type          =   var.os_disk_storage_account_type
         disk_size_gb                  =   var.os_disk_size_gb
