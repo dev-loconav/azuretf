@@ -51,7 +51,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     name                              =   "var.cluster_name${count.index}"
     resource_group_name               =   var.resource_group_name
     location                          =   var.location
-    network_interface_ids             =   [azurerm_network_interface.nic[count.index]]
+    network_interface_ids             =   [azurerm_network_interface.nic[count.index].id]
     size                              =   var.virtual_machine_size
     computer_name                     =   "var.cluster_name${count.index}"
     admin_username                    =   var.admin_username
