@@ -19,7 +19,7 @@ resource "azurerm_public_ip" "pip" {
     name                              =   "linuxvm-public-ip${count.index}"
     resource_group_name             =     var.resource_group_name
     location                        =     var.location
-    allocation_method               =     var.allocation_method[0]
+    allocation_method               =     var.allocation_method
     tags                            =     var.tags
 }
 
@@ -37,7 +37,7 @@ resource "azurerm_network_interface" "nic" {
         name                          =  "linuxvm-public-ip${count.index}"
         subnet_id                     =   data.azurerm_subnet.web.id
         public_ip_address_id          =   azurerm_public_ip.pip[count.index]
-        private_ip_address_allocation =   var.allocation_method[1]
+        private_ip_address_allocation =   var.allocation_method
     }
 }
 
