@@ -65,7 +65,7 @@ variable "environment_name" {
 
 variable "vm_clusters" {
   type = map(object({
-    cl_name      = string
+    // cl_name      = string
     allocation_method = string
     instance_count    = number
     virtual_machine_size  = string
@@ -78,7 +78,9 @@ variable "vm_clusters" {
 	offer		= string
 	sku		= string
 	vm_image_version = string
-	ma_disk_size_gb = number
+	  p1	= string
+	  p2	= string
+	// ma_disk_size_gb = number
        tags          = map(string)
   }))
 }
