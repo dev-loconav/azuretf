@@ -76,7 +76,7 @@ module "vnet" {
     tags  = var.tags
 }
 
-/* module "vm" {
+ module "vm" {
   source = "./azure/linuxVM-Existing-RG-Vnet/"
 
       resource_group_name = var.resource_group_name
@@ -102,5 +102,5 @@ module "vnet" {
    managed_disk_size_gb = each.value.managed_disk_size_gb
    cluster_name = each.value.cluster_name  
 }
-    */
+ 
 
