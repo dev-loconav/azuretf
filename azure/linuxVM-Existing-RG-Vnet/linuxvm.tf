@@ -48,12 +48,14 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_linux_virtual_machine" "vm" {
     count                             =   var.instance_count
-    name                              =   join("-", [var.cluster_name, ${count.index}])
+    name                                = "vm-${count.index}"
+    #name                              =   join("-", [var.cluster_name, ${count.index}])
     resource_group_name               =   var.resource_group_name
     location                          =   var.location
     network_interface_ids             =   [azurerm_network_interface.nic[count.index].id]
     size                              =   var.virtual_machine_size
-    computer_name                     =   join("-", [var.cluster_name, ${count.index}])
+    #computer_name                     =   join("-", [var.cluster_name, ${count.index}])
+     computer_name                                = "vm-${count.index}"
     admin_username                    =   var.admin_username
     admin_password                    =   var.admin_password
     disable_password_authentication   =   false
