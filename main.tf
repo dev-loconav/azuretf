@@ -103,4 +103,13 @@ module "vnet" {
    cluster_name = each.value.cluster_name  
 }
  
+/*
+  locals {
+  availability_zones = flatten([for i in module.ec2 : i.availability_zone])
+  instance_ids       = flatten([for i in module.ec2 : i.id])
+  private_ips        = flatten([for i in module.ec2 : i.private_ip])
+  ec2_names          = flatten([for i in module.ec2 : i.tags])
+  ec2_name_tag       = flatten([for i in local.ec2_names : i.Name])
+}
 
+*/
